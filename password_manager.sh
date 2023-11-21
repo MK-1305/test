@@ -13,7 +13,7 @@ while true; do
 	read -p "パスワードを入力してください：" password
 
 	if [ "$service" ] && [ "$user" ] && [ "$password" ]; then
-		echo   "サービス名：$service ユーザー名：$user パスワード：$password" >> pass.txt  
+		echo "サービス名：$service ユーザー名：$user パスワード：$password" >> pass.txt  
 		echo "Thank you!"
 	else
 		echo "すべて入力してください"
@@ -24,9 +24,8 @@ while true; do
 	
 		read -p "サービス名を入力してください：" service
 		
-		#$を参照できないので、grepで書くべき？
-		awk -v service="$service" $1 == service '{print "サービス名：" $1, "ユーザー名：" $2, "パスワード：" $3}' pass.txt
-
+		#-dは区切り文字、-fはフィールド番号、--output-delimiterは結果の各列の間に入れる
+		grep "$service" pass.txt | cut -d ' ' -f 1,2,3 --output-delimiter=' '
 
 	elif  [ "$choice" == "Exit" ]; then
 		echo "Thank you!"
@@ -37,3 +36,5 @@ while true; do
  fi
 
 done
+
+exit

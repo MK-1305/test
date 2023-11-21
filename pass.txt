@@ -2,3 +2,4 @@
 サービス名：aaa ユーザー名：bbb パスワード：ccc
 サービス名：aaa ユーザー名：bbb パスワード：ccc
 サービス名：aaa ユーザー名：bbb パスワード：ccc
+サービス名：amazon ユーザー名：k パスワード：aaa
