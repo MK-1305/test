@@ -23,12 +23,9 @@ while true; do
 	elif [ "$choice" == "Get Password" ]; then
 	
 		read -p "サービス名を入力してください：" service
-	
-		grep [ "$service" ] pass.txt
-	
-		echo "サービス名：$service"
-		echo "ユーザー名：$user"
-		echo "パスワード：$password"
+		
+		#$を参照できないので、grepで書くべき？
+		awk -v service="$service" $1 == service '{print "サービス名：" $1, "ユーザー名：" $2, "パスワード：" $3}' pass.txt
 
 
 	elif  [ "$choice" == "Exit" ]; then
