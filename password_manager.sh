@@ -14,16 +14,22 @@ while true; do
 
 	if [ "$service" ] && [ "$user" ] && [ "$password" ]; then
 		echo "サービス名：$service ユーザー名：$user パスワード：$password" >> pass.txt  
+		#.gpgの暗号化ファイルを作成
+		gpg --yes pass.txt
+
+		#暗号化元のファイルを削除
+		rm pass.txt
+
 		echo "Thank you!"
 	else
 		echo "すべて入力してください"
 	fi
 
-
 	elif [ "$choice" == "Get Password" ]; then
 	
 		read -p "サービス名を入力してください：" service
-		
+		#暗号化ファイルを復号化
+		gpg pass.txt.pgp
 		#-dは区切り文字、-fはフィールド番号、--output-delimiterは結果の各列の間に入れる
 		grep "$service" pass.txt | cut -d ' ' -f 1,2,3 --output-delimiter=' '
 
@@ -36,5 +42,6 @@ while true; do
  fi
 
 done
+#暗号化元のファイルを削除
 
 exit
